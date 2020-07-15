@@ -277,13 +277,13 @@ void demo(char *cfgfile, char *weightfile, float thresh, int cam_index, const ch
    cap = cvCaptureFromCAM(cam_index);
 
    if(w){
-   cvSetCaptureProperty(cap, CV_CAP_PROP_FRAME_WIDTH, w);
+   cvSetCaptureProperty(cap, CAP_PROP_FRAME_WIDTH, w); // Adaptation for Opencv4
    }
    if(h){
-   cvSetCaptureProperty(cap, CV_CAP_PROP_FRAME_HEIGHT, h);
+   cvSetCaptureProperty(cap, CAP_PROP_FRAME_HEIGHT, h); // Adaptation for Opencv4
    }
    if(frames){
-   cvSetCaptureProperty(cap, CV_CAP_PROP_FPS, frames);
+   cvSetCaptureProperty(cap, CAP_PROP_FPS, frames); // Adaptation for Opencv4
    }
    }
 

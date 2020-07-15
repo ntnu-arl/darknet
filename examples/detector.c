@@ -641,10 +641,10 @@ void censor_detector(char *datacfg, char *cfgfile, char *weightfile, int cam_ind
     }
 
     if(w){
-        cvSetCaptureProperty(cap, CV_CAP_PROP_FRAME_WIDTH, w);
+        cvSetCaptureProperty(cap, CAP_PROP_FRAME_WIDTH, w); // Adaptation for Opencv4
     }
     if(h){
-        cvSetCaptureProperty(cap, CV_CAP_PROP_FRAME_HEIGHT, h);
+        cvSetCaptureProperty(cap, CAP_PROP_FRAME_HEIGHT, h); // Adaptation for Opencv4
     }
 
     if(!cap) error("Couldn't connect to webcam.\n");
@@ -714,10 +714,10 @@ void extract_detector(char *datacfg, char *cfgfile, char *weightfile, int cam_in
     }
 
     if(w){
-        cvSetCaptureProperty(cap, CV_CAP_PROP_FRAME_WIDTH, w);
+        cvSetCaptureProperty(cap, CAP_PROP_FRAME_WIDTH, w); // Adaptation for Opencv4
     }
     if(h){
-        cvSetCaptureProperty(cap, CV_CAP_PROP_FRAME_HEIGHT, h);
+        cvSetCaptureProperty(cap, CAP_PROP_FRAME_HEIGHT, h); // Adaptation for Opencv4
     }
 
     if(!cap) error("Couldn't connect to webcam.\n");
