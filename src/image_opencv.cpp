@@ -17,11 +17,13 @@ Mat image_to_mat(image im)
     constrain_image(copy);
     if(im.c == 3) rgbgr_image(copy);
     Mat m(im.h, im.w, CV_MAKETYPE(CV_8U, im.c));
+    int im_h_w = im.h*im.w;
+    int im_w_c = im.w*im.c;
     for(y = 0; y < im.h; ++y){
         for(x = 0; x < im.w; ++x){
             for(c= 0; c < im.c; ++c){
-                float val = copy.data[c*im.h*im.w + y*im.w + x];
-                m.data[y*im.w*im.c + x*im.c + c] = (unsigned char)(val*255);
+                float val = copy.data[c*im_h_w + y*im.w + x];
+                m.data[y*im_w_c + x*im.c + c] = (unsigned char)(val*255);
             }
         }
     }
