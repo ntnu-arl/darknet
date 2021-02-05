@@ -455,5 +455,3 @@ void run_attention(int argc, char **argv)
     else if(0==strcmp(argv[2], "valid")) validate_attention_single(data, cfg, weights);
     else if(0==strcmp(argv[2], "validmulti")) validate_attention_multi(data, cfg, weights);
 }
-
-
