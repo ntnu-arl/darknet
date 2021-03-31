@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <fstream>
 
 #include "network.h"
 #include "detection_layer.h"
@@ -9,6 +10,9 @@
 
 void train_compare(char *cfgfile, char *weightfile)
 {
+    ofstream fstream;
+    fstream.open("avg_loss.txt");
+
     srand(time(0));
     float avg_loss = -1;
     char *base = basecfg(cfgfile);
@@ -42,7 +46,8 @@ void train_compare(char *cfgfile, char *weightfile)
     load_thread = load_data_in_thread(args);
     int epoch = *net.seen/N;
     int i = 0;
-    while(1){
+    while(1)
+    {
         ++i;
         time=clock();
         pthread_join(load_thread, 0);
@@ -54,14 +59,19 @@ void train_compare(char *cfgfile, char *weightfile)
         float loss = train_network(net, train);
         if(avg_loss == -1) avg_loss = loss;
         avg_loss = avg_loss*.9 + loss*.1;
+	
+	fstream << i << ", " << avg_loss << std::endl;
+	
         printf("%.3f: %f, %f avg, %lf seconds, %ld images\n", (float)*net.seen/N, loss, avg_loss, sec(clock()-time), *net.seen);
         free_data(train);
-        if(i%100 == 0){
+        if(i%100 == 0)
+	{
             char buff[256];
             sprintf(buff, "%s/%s_%d_minor_%d.weights",backup_directory,base, epoch, i);
             save_weights(net, buff);
         }
-        if(*net.seen/N > epoch){
+        if(*net.seen/N > epoch)
+	{
             epoch = *net.seen/N;
             i = 0;
             char buff[256];
@@ -76,6 +86,8 @@ void train_compare(char *cfgfile, char *weightfile)
     free_ptrs((void**)paths, plist->size);
     free_list(plist);
     free(base);
+
+    fstream.close();
 }
 
 void validate_compare(char *filename, char *weightfile)
