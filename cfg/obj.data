@@ -1,0 +1,5 @@
+classes= 8
+train  = data/training/train.list
+valid  = data/training/test.list
+labels = data/training/labels.txt
+backup = backup/
